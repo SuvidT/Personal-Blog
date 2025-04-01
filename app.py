@@ -87,8 +87,18 @@ def internal_server_error(e):
 
 # ------------------------
 # ROUTES
+'''
+- /articles/<article>
+- 
+'''
 # ------------------------
+@app.route('/')
+def welcome():
+    return render_template("welcome.html")
 
+@app.route('/articles/')
+def articles():
+    pass
 
 # ------------------------
 # RUNNING

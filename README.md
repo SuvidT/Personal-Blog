@@ -15,4 +15,9 @@ Kind of like a fourm about myself.
    git clone https://github.com/your-username/personal-blog.git
 
 ## TODO
-[ ] add a style sheet
+- /
+- /login
+- /signup
+- /articles/
+- /articles/{article_title}
+- /home
