@@ -14,3 +14,5 @@ Kind of like a fourm about myself.
    ```sh
    git clone https://github.com/your-username/personal-blog.git
 
+## TODO
+[ ] add a style sheet
