@@ -32,13 +32,23 @@ def get_article(article_title):
     
     if data[f"{article_title}"]["archived"] == True:
         article["content"] = "<p>This article has been archived</p>"
+        return article
 
     data = data[f"{article_title}"]
 
     article["date"] = datetime(data["date"][0], data["date"][1], data["date"][2]).strftime("%B %d, %Y")
     article["author"] = data["author"]
 
-    with open(md_file, )
+    with open(md_file, "r", encoding="utf-8") as file:
+        content = file.read()
+
+    article["content"] = markdown.markdown(content)
+
+    return article
 
 def get_articles():
     pass
+
+# ------------------------
+# TESTING
+# ------------------------
