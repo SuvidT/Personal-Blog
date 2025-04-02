@@ -7,6 +7,8 @@ It initializes the app and the routes
 # IMPORTS
 # ------------------------
 from flask import Flask, render_template
+from markupsafe import escape
+from articles import get_article, get_articles
 
 # ------------------------
 # CONSTANTS
@@ -88,13 +90,14 @@ def internal_server_error(e):
 # ------------------------
 # ROUTES
 # ------------------------
-@app.route('/')
-def welcome():
-    return render_template("welcome.html")
+@app.route('/articles/<articleName>')
+def article(articleName):
+    safe_article_name = escape(articleName)
+    formatted_article_name = safe_article_name.replace("_", " ")
 
-@app.route('/articles/')
-def articles():
-    pass
+    article = get_article(formatted_article_name)
+
+    return render_template("article.html")
 
 # ------------------------
 # RUNNING
