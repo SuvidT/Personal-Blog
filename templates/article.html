@@ -6,11 +6,11 @@
     <body>
         <main>
             <p id="date">{{ article.date }}</p>
-            <h1 id="title">{{ article.name }}</h1>
+            <h1 id="title">{{ article.title }}</h1>
             <p id="author">{{ article.author }}</p>
 
             <article>
-                {{ article.content }}
+                {{ article.content | safe }}
             </article>
         </main>
     </body>

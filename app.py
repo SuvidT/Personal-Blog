@@ -56,6 +56,7 @@ def page_not_found(e):
 
     Returns:
         tuple: A tuple containing the rendered error template and the HTTP status code (404).
+    
     """
     return render_template("error.html", e=e), 404
 
@@ -90,6 +91,10 @@ def internal_server_error(e):
 # ------------------------
 # ROUTES
 # ------------------------
+@app.route('/')
+def home():
+    return "<h1> TODO: Home Page </h1>"
+
 @app.route('/articles/<articleName>')
 def article(articleName):
     safe_article_name = escape(articleName)
@@ -97,7 +102,7 @@ def article(articleName):
 
     article = get_article(formatted_article_name)
 
-    return render_template("article.html")
+    return render_template("article.html", article=article)
 
 # ------------------------
 # RUNNING
