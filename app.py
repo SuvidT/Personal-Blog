@@ -87,10 +87,6 @@ def internal_server_error(e):
 
 # ------------------------
 # ROUTES
-'''
-- /articles/<article>
-- 
-'''
 # ------------------------
 @app.route('/')
 def welcome():

@@ -15,9 +15,22 @@ Kind of like a fourm about myself.
    git clone https://github.com/your-username/personal-blog.git
 
 ## TODO
+landing
 - /
+
+user
 - /login
 - /signup
+- /home/
+
+admin
+- /admin
+- /admin/articles
+
+articles
 - /articles/
 - /articles/{article_title}
-- /home
+
+user articles
+- /user/articles/
+- /uesr/articles/{article_title}
