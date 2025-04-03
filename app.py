@@ -95,6 +95,10 @@ def internal_server_error(e):
 def home():
     return "<h1> TODO: Home Page </h1>"
 
+@app.route('/articles/')
+def articles():
+    pass
+
 @app.route('/articles/<articleName>')
 def article(articleName):
     safe_article_name = escape(articleName)

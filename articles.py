@@ -30,6 +30,7 @@ def get_article(article_title):
             - content (str): The HTML content of the article. If the article is archived or does not exist,
               a corresponding message is returned instead.
     """
+
     md_file = md_files_path + f'{article_title}.md'
     article = {
         "title": f"{article_title}", 
@@ -62,7 +63,10 @@ def get_article(article_title):
     return article
 
 def get_articles():
-    pass
+    with open(json_file, "r") as file:
+        data = json.load(file)
+    
+    
 
 # ------------------------
 # TESTING
