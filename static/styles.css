@@ -1,4 +1,78 @@
+/*
+Midnight Luxe Color Palette:
+- #181818 (Deep Black)
+- #282828 (Charcoal Gray)
+- #B0B0B0 (Muted Silver)
+- #EAEAEA (Soft White)
+- #FF5252 (Accent Red)
+*/
+
 body {
-    background-color: #121212;
-    color: #e0e0e0
+    background-color: #181818; /* Deep Black for background */
+    color: #EAEAEA; /* Soft White for text */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+main {
+    background-color: #282828; /* Charcoal Gray for main content */
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7); /* Subtle shadow for depth */
+    max-width: 1000px;
+}
+
+h1, h2, h3 {
+    color: #B0B0B0; /* Muted Silver for headings */
+}
+
+#title {
+    text-align: center;
+    color: #FF5252; /* Accent Red for the title */
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+#date {
+    text-align: right;
+    color: #B0B0B0; /* Muted Silver for the date */
+    font-size: 0.9rem;
+}
+
+#author {
+    text-align: left;
+    color: #B0B0B0; /* Muted Silver for the author */
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+article {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #EAEAEA; /* Soft White for article content */
+}
+
+a {
+    color: #FF5252; /* Accent Red for links */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #B0B0B0; /* Muted Silver for hover effect */
+    text-decoration: underline;
+}
+
+a#return_home {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #FF5252; /* Accent Red for return link */
+    font-size: 1.2rem;
+}
+
+a#return_home:hover {
+    color: #EAEAEA; /* Soft White on hover */
 }
