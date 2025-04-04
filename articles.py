@@ -39,7 +39,7 @@ def get_article(num):
         data = json.load(file)
 
     # checks if the num is valid
-    if len(data) >= num or data[num] == 0:
+    if len(data) <= num or num < 0 or data[num] == 0:
         return None
     
     # stores the metadata we wanted from the article in article

@@ -6,7 +6,7 @@ It initializes the app and the routes
 # ------------------------
 # IMPORTS
 # ------------------------
-from flask import Flask, render_template
+from flask import Flask, render_template, abort
 from markupsafe import escape
 from articles import get_article, get_articles
 
@@ -99,11 +99,14 @@ def home():
 def articles():
     articles = get_articles()
 
-    return render_template("articles.html", article=article)
+    return render_template("articles.html", articles=articles)
 
-@app.route('/articles/int: <num>')
+@app.route('/articles/<int:num>')
 def article(num):
     article = get_article(num)
+
+    if article is None:
+        abort(404)
 
     return render_template("article.html", article=article)
 

@@ -64,7 +64,7 @@ a:hover {
     text-decoration: underline;
 }
 
-a#return_home {
+a#return {
     display: block;
     text-align: center;
     margin-top: 20px;
@@ -73,6 +73,6 @@ a#return_home {
     font-size: 1.2rem;
 }
 
-a#return_home:hover {
+a#return:hover {
     color: #EAEAEA; /* Soft White on hover */
 }
