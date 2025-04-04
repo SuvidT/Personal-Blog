@@ -4,7 +4,7 @@
 from os import path
 from datetime import datetime
 import json
-import markdown
+from markdown import markdown
 
 # ------------------------
 # CONSTANTS
@@ -55,7 +55,7 @@ def get_article(num):
         content = file.read()
 
     # puts the content into the article dict
-    article["content"] = content
+    article["content"] = markdown(content)
 
     # returns the article metadata and content
     return article

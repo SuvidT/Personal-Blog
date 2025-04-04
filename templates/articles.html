@@ -3,38 +3,20 @@
     <head>
         <title>Articles</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-        <style>
-            .article-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 10px;
-            }
-
-            .article-title {
-                font-weight: bold;
-                display: inline-block;
-            }
-
-            .article-date {
-                color: #B0B0B0; /* Muted Silver for the date */
-                font-size: 0.9rem;
-            }
-        </style>
     </head>
     <body>
-        <h1 id="title">Articles</h1>
         <main>
-            <ul>
-                {% for article in articles %}
-                    <li>
-                        <div class="article-header">
-                            <span class="article-title">{{ article.title }}</span> by {{ article.author }}
-                            <span class="article-date">{{ article.date[0] }}-{{ article.date[1] }}-{{ article.date[2] }}</span>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
+            <h1 id="title">Articles</h1>
+            {% for article in articles %}
+                <div class="article-list">
+                    <div class="article-header">
+                        <a id="article-link" href="/articles/{{ article.num }}">{{ article.title }}</a>
+                        <span id="date">{{ article.date[0] }}-{{ article.date[1] }}-{{ article.date[2] }}</span>
+                    </div>
+                    <p id="author">By {{ article.author }}</p>
+                    <br>
+                </div>
+            {% endfor %}
         </main>
     </body>
 </html>

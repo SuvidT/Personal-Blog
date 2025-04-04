@@ -76,3 +76,42 @@ a#return {
 a#return:hover {
     color: #EAEAEA; /* Soft White on hover */
 }
+
+.article-list a {
+    font-weight: bold;
+    color: #FF5252; /* Accent Red for links */
+    text-decoration: none;
+}
+
+.article-list a:hover {
+    color: #B0B0B0; /* Muted Silver on hover */
+}
+
+.article-list p#author {
+    color: #B0B0B0; /* Muted Silver for the author */
+    font-size: 0.9rem;
+    margin: 5px 0;
+}
+
+.article-list p#date {
+    color: #B0B0B0; /* Muted Silver for the date */
+    font-size: 0.9rem;
+    text-align: right;
+}
+
+.article-header {
+    display: flex; /* Use Flexbox for horizontal alignment */
+    justify-content: space-between; /* Space between title and date */
+    align-items: center; /* Vertically align items */
+    margin-bottom: 10px; /* Add spacing below the header */
+}
+
+#article-link {
+    font-weight: bold;
+    color: #FF5252; /* Accent Red for the title link */
+    text-decoration: none;
+}
+
+#article-link:hover {
+    color: #B0B0B0; /* Muted Silver on hover */
+}
