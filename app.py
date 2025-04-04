@@ -92,9 +92,6 @@ def internal_server_error(e):
 # ROUTES
 # ------------------------
 @app.route('/')
-def home():
-    return "<h1> TODO: Home Page </h1>"
-
 @app.route('/articles/')
 def articles():
     articles = get_articles()
