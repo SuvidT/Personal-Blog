@@ -97,14 +97,13 @@ def home():
 
 @app.route('/articles/')
 def articles():
-    pass
+    articles = get_articles()
 
-@app.route('/articles/<articleName>')
-def article(articleName):
-    safe_article_name = escape(articleName)
-    formatted_article_name = safe_article_name.replace("_", " ")
+    return render_template("articles.html", article=article)
 
-    article = get_article(formatted_article_name)
+@app.route('/articles/int: <num>')
+def article(num):
+    article = get_article(num)
 
     return render_template("article.html", article=article)
 

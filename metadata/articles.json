@@ -1,19 +1,23 @@
-{
-    "Video Games": {
-        "archived": false, 
-        "author": "User", 
-        "date": [2025, 4, 2]
+[
+    {
+        "title": "Video Games",
+        "author": "User",
+        "date": [2025, 4, 2],
+        "num": 0,
+        "archived": false
     },
-    
-    "Nintendo": {
-        "archived": false, 
-        "author": "User", 
-        "date": [2025, 4, 3]
+    {
+        "title": "Nintendo",
+        "author": "User",
+        "date": [2025, 4, 3],
+        "num": 1,
+        "archived": false
     },
-    
-    "Breath of the Wild": {
-        "archived": false, 
-        "author": "User", 
-        "date": [2025, 4, 4]
+    {
+        "title": "Breath of the Wild",
+        "author": "User",
+        "date": [2025, 4, 4],
+        "num": 2,
+        "archived": false
     }
-}
+]
