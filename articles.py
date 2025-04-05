@@ -93,9 +93,13 @@ def get_articles():
         # choosing the middle as the pivot 
         pivot = arr[len(arr) // 2]
 
+        if pivot["archived"]:
+            arr.remove(pivot)
+            return quicksort(arr)
+
         # partition the arry into two subarrays
-        less = [article for article in arr if std_date(article["date"]) > std_date(pivot["date"])]
-        greater = [article for article in arr if std_date(article["date"]) <= std_date(pivot["date"]) and article != pivot]
+        less = [article for article in arr if std_date(article["date"]) > std_date(pivot["date"]) and article["archived"] == False]
+        greater = [article for article in arr if std_date(article["date"]) <= std_date(pivot["date"]) and article != pivot and article["archived"] == False]
 
         # recursive call
         return quicksort(less) + [pivot] + quicksort(greater)
@@ -159,6 +163,13 @@ def archive_article(num):
     # inserting the data back in
     with open(json.file, "w") as file:
         json.dump(data, file, indent=4)
+
+def delete_article(num):
+
+    with open(json_file, "r") as file:
+        data = json.load(file)
+
+    data [num] = 0
 
 # ------------------------
 # TESTING
