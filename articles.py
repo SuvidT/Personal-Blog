@@ -99,6 +99,82 @@ def get_articles():
     
     return quicksort(data)
 
+
+def add_article(article):
+    '''
+    article
+    - title
+    - author
+    - date
+    - content
+    '''
+
+    content = article["content"]
+
+    with open(json_file, "r") as file:
+        data = json.load(file)
+
+    metadata = {
+        "title": article["title"],
+        "author": article["author"],
+        "date": article["date"],
+        "num": len(data),
+        "archived": False
+        }
+    md_file = md_files_path + f"{article["title"]}.md"
+
+    replaced = False
+    for index, article in enumerate(data):
+        if article == 0:
+            metadata["num"] = index
+            data[index] = metadata
+            replaced = True
+    
+    if not replaced:
+        data.append(metadata)
+
+    with open(json_file, "w") as file:
+        json.dump(data, file, indent=4)
+
+    with open(md_file, "w", encoding="utf-8") as file:
+        file.write(content)
+    
 # ------------------------
 # TESTING
 # ------------------------
+
+content = """
+Twinkle, twinkle, little star,
+How I wonder what you are!
+Up above the world so high,
+Like a diamond in the sky.
+
+When the blazing sun is gone,
+When he nothing shines upon,
+Then you show your little light,
+Twinkle, twinkle, all the night.
+
+Then the traveler in the dark
+Thanks you for your tiny spark;
+He could not see which way to go,
+If you did not twinkle so.
+
+In the dark blue sky you keep,
+And often through my curtains peep,
+For you never shut your eye
+Till the sun is in the sky.
+
+As your bright and tiny spark
+Lights the traveler in the dark,
+Though I know not what you are,
+Twinkle, twinkle, little star.
+"""
+
+article = {
+    "title": "Twinkle, Twinkle, Little Star",
+    "author": "Jane Taylor",
+    "date": [1806, 1, 1],
+    "content": content
+}
+
+add_article(article)
