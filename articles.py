@@ -34,6 +34,10 @@ def get_article(num):
         None: If the index is invalid, the article is archived, or the article does not exist.
     """
 
+    md_file = md_files_path + f"{article["title"]}.md"
+    if not path.exists(md_file):
+        return None
+
     # gets metadata about articles from the json file
     with open(json_file, "r") as file:
         data = json.load(file)
@@ -50,7 +54,6 @@ def get_article(num):
         return None
 
     # gets the content of the markdown file with the title of the article  
-    md_file = md_files_path + f"{article["title"]}.md"
     with open(md_file, "r", encoding="utf-8") as file:
         content = file.read()
 
@@ -113,7 +116,8 @@ def add_article(article):
     with open(json_file, "r") as file:
         data = json.load(file)
 
-    # 
+    # setting up variables
+    # metadata is what will be put in the articles.json
     metadata = {
         "title": article["title"],
         "author": article["author"],
@@ -121,16 +125,19 @@ def add_article(article):
         "num": len(data),
         "archived": False
         }
+    # this is the file path of the newly created article
     md_file = md_files_path + f"{article["title"]}.md"
+    # this is the content that will be put in the markdown file
     content = article["content"]
 
+    # this is the part where we add the article metadata into the data
+    # this will replace the first 0 in the list, or add at the end
     replaced = False
     for index, article in enumerate(data):
         if article == 0:
             metadata["num"] = index
             data[index] = metadata
             replaced = True
-    
     if not replaced:
         data.append(metadata)
 
@@ -140,6 +147,19 @@ def add_article(article):
     with open(md_file, "w", encoding="utf-8") as file:
         file.write(content)
     
+def archive_article(num):
+
+    # getting the data from json as data
+    with open(json_file, "r") as file:
+        data = json.load(file)
+
+    # archiving the article at num
+    data[num]["archived"] = True
+
+    # inserting the data back in
+    with open(json.file, "w") as file:
+        json.dump(data, file, indent=4)
+
 # ------------------------
 # TESTING
 # ------------------------
