@@ -1,7 +1,7 @@
 # ------------------------
 # IMPORTS
 # ------------------------
-from os import path
+from os import path, remove
 from datetime import datetime
 import json
 from markdown import markdown
@@ -33,7 +33,7 @@ def get_article(num):
 
         None: If the index is invalid, the article is archived, or the article does not exist.
     """
-
+    # checks if the markdown file exists
     md_file = md_files_path + f"{article["title"]}.md"
     if not path.exists(md_file):
         return None
@@ -93,13 +93,13 @@ def get_articles():
         # choosing the middle as the pivot 
         pivot = arr[len(arr) // 2]
 
-        if pivot["archived"]:
+        if pivot["archived"] or pivot == 0:
             arr.remove(pivot)
             return quicksort(arr)
 
         # partition the arry into two subarrays
-        less = [article for article in arr if std_date(article["date"]) > std_date(pivot["date"]) and article["archived"] == False]
-        greater = [article for article in arr if std_date(article["date"]) <= std_date(pivot["date"]) and article != pivot and article["archived"] == False]
+        less = [article for article in arr if article != 0 and std_date(article["date"]) > std_date(pivot["date"]) and article["archived"] == False]
+        greater = [article for article in arr if article != 0 and std_date(article["date"]) <= std_date(pivot["date"]) and article != pivot and article["archived"] == False]
 
         # recursive call
         return quicksort(less) + [pivot] + quicksort(greater)
@@ -119,6 +119,9 @@ def add_article(article):
     # Loads all the data from the json file as data
     with open(json_file, "r") as file:
         data = json.load(file)
+
+    if article["date"] == None:
+        article["date"] = datetime.now().strftime("%Y-%m-%d")
 
     # setting up variables
     # metadata is what will be put in the articles.json
@@ -152,7 +155,6 @@ def add_article(article):
         file.write(content)
     
 def archive_article(num):
-
     # getting the data from json as data
     with open(json_file, "r") as file:
         data = json.load(file)
@@ -165,11 +167,12 @@ def archive_article(num):
         json.dump(data, file, indent=4)
 
 def delete_article(num):
-
     with open(json_file, "r") as file:
         data = json.load(file)
 
     data [num] = 0
+
+
 
 # ------------------------
 # TESTING
