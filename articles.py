@@ -170,10 +170,13 @@ def delete_article(num):
     with open(json_file, "r") as file:
         data = json.load(file)
 
+    md_file = md_files_path + f"{data[num]["title"]}.md"
     data[num] = 0
 
     with open(json_file, "w") as file:
         json.dump(data, file, indent=4)
+
+    remove(md_file)
 
 # ------------------------
 # TESTING

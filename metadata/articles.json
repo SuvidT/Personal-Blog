@@ -32,15 +32,5 @@
         "num": 2,
         "archived": false
     },
-    {
-        "title": "Twinkle, Twinkle, Little Star",
-        "author": "Jane",
-        "date": [
-            1806,
-            1,
-            1
-        ],
-        "num": 3,
-        "archived": false
-    }
+    0
 ]
