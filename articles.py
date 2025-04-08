@@ -33,11 +33,6 @@ def get_article(num):
 
         None: If the index is invalid, the article is archived, or the article does not exist.
     """
-    # checks if the markdown file exists
-    md_file = md_files_path + f"{article["title"]}.md"
-    if not path.exists(md_file):
-        return None
-
     # gets metadata about articles from the json file
     with open(json_file, "r") as file:
         data = json.load(file)
@@ -51,6 +46,11 @@ def get_article(num):
 
     # checks if the article is archived
     if article["archived"] == True:
+        return None
+
+    # checks if the markdown file exists
+    md_file = md_files_path + f"{article["title"]}.md"
+    if not path.exists(md_file):
         return None
 
     # gets the content of the markdown file with the title of the article  
@@ -178,6 +178,9 @@ def delete_article(num):
         json.dump(data, file, indent=4)
 
     remove(md_file)
+
+def edit_article(article):
+    pass
 
 # ------------------------
 # TESTING
