@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>{{ article.title }}</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    </head>
-    <body>
-        <main>
-            <p id="date">{{ article.date[0] }}-{{ article.date[1] }}-{{ article.date[2] }}</p>
-            <h1 id="title">{{ article.title }}</h1>
-            <p id="author">By {{ article.author }}</p>
+{% extends "base.html" %}
 
-            <article>
-                {{ article.content | safe }}
-            </article>
+{% block title %}{{ article.title }}{% endblock %}
 
-            <a id="return" href="/articles/">Return</a>
-        </main>
-    </body>
-</html>
+{% block content %}
+    <p id="date">{{ article.date[0] }}-{{ article.date[1] }}-{{ article.date[2] }}</p>
+    <h1 id="title">{{ article.title }}</h1>
+    <p id="author">By {{ article.author }}</p>
+
+    <article>
+        {{ article.content | safe }}
+    </article>
+
+    <a id="return" href="/articles/">Return</a>
+{% endblock %}

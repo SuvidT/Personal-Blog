@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>{{ e.code }} - {{ e.name }}</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    </head>
-    <body>
-        <main>
-            <h1 id="title">{{ e.code }} - {{ e.name }}</h1>
-            <p>{{ e.description }}</p>
-            <a id="return" href="/">Return Home</a>
-        </main>
-    </body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}{{ e.code }} - {{ e.name }}{% endblock %}
+
+{% block content %}
+    <h1 id="title">{{ e.code }} - {{ e.name }}</h1>
+    <p>{{ e.description }}</p>
+    <a id="return" href="/">Return Home</a>
+{% endblock %}
