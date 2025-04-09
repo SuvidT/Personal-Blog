@@ -1,0 +1,10 @@
+{
+    "sampleUser": {
+        "password": "123password",
+        "admin": false
+    },
+    "sampleAdmin": {
+        "password": "123Admin",
+        "admin": true
+    }
+}
