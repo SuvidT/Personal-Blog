@@ -1,10 +1,12 @@
 {
-    "sampleUser": {
-        "password": "123password",
+    "SuvidUser": {
+        "password": "AbCdEf!2#4%6",
+        "email": "Suvid2004@gmail.com",
         "admin": false
     },
-    "sampleAdmin": {
-        "password": "123Admin",
+    "SuvidAdmin": {
+        "passowrd": "abcdeF12345^",
+        "email": "Suvid@outlook.com",
         "admin": true
     }
 }
