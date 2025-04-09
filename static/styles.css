@@ -64,19 +64,6 @@ a:hover {
     text-decoration: underline;
 }
 
-a#return {
-    display: block;
-    text-align: center;
-    margin-top: 20px;
-    text-decoration: none;
-    color: #FF5252; /* Accent Red for return link */
-    font-size: 1.2rem;
-}
-
-a#return:hover {
-    color: #EAEAEA; /* Soft White on hover */
-}
-
 .article-list a {
     font-weight: bold;
     color: #FF5252; /* Accent Red for links */
@@ -114,4 +101,58 @@ a#return:hover {
 
 #article-link:hover {
     color: #B0B0B0; /* Muted Silver on hover */
+}
+
+/* NAVIGATION BAR STYLING */
+
+nav {
+    background-color: #282828; /* Charcoal Gray */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    border-bottom: 2px solid #181818;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav a {
+    color: #EAEAEA;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1rem;
+    transition: color 0.2s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+nav a:hover {
+    color: #FF5252;
+    text-decoration: underline;
+}
+
+.nav-left,
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+nav .nav-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #FF5252; /* Accent Red */
+    margin-right: 30px;
+}
+
+/* Optional: make links uppercase for a cleaner feel */
+nav a {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Ensure header takes no extra space below */
+header {
+    margin-bottom: 40px;
 }
