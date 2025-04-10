@@ -13,24 +13,3 @@ Kind of like a fourm about myself.
 1. Clone the repository:
    ```sh
    git clone https://github.com/your-username/personal-blog.git
-
-## TODO
-landing
-- /
-
-user
-- /login
-- /signup
-- /home/
-
-admin
-- /admin
-- /admin/articles
-
-articles
-- /articles/
-- /articles/{article_title}
-
-user articles
-- /user/articles/
-- /uesr/articles/{article_title}
