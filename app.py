@@ -8,7 +8,9 @@ It initializes the app and the routes
 # ------------------------
 from flask import Flask, render_template, abort
 from markupsafe import escape
+
 from articles import get_article, get_articles
+import users
 
 # ------------------------
 # CONSTANTS

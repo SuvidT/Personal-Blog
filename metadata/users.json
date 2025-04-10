@@ -1,11 +1,11 @@
 {
     "SuvidUser": {
-        "password": "AbCdEf!2#4%6",
+        "password": "$2b$12$7NuIUpQwHSc/0pffllJhqudKN66Wuc1UmrnYtK3ah1gqLog1XvMx6",
         "email": "Suvid2004@gmail.com",
         "admin": false
     },
     "SuvidAdmin": {
-        "passowrd": "abcdeF12345^",
+        "password": "$2b$12$cEuzIXHyJgtD3YhHo9VCpuFQHjwnZxOtN52gjcM3gcDCP3ND7EF5q",
         "email": "Suvid@outlook.com",
         "admin": true
     }
