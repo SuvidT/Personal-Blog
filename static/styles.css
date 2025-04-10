@@ -156,3 +156,67 @@ nav a {
 header {
     margin-bottom: 40px;
 }
+
+/* LOGIN FORM STYLING */
+.login-container {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #282828;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.login-form label {
+    color: #B0B0B0;
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.login-form input {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #181818;
+    color: #EAEAEA;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.login-form input:focus {
+    outline: none;
+    border: 2px solid #FF5252;
+    background-color: #202020;
+}
+
+.login-form button {
+    background-color: #FF5252;
+    color: #EAEAEA;
+    border: none;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.login-form button:hover {
+    background-color: #b03a3a;
+}
+
+.form-footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #B0B0B0;
+    margin-top: 10px;
+}

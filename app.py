@@ -109,6 +109,10 @@ def article(num):
 
     return render_template("article.html", article=article)
 
+@app.route('/login')
+def login():
+    return render_template("login.html")
+
 # ------------------------
 # RUNNING
 # ------------------------
