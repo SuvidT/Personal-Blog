@@ -3,6 +3,7 @@
 # ------------------------
 import json
 import bcrypt
+import re
 
 # ------------------------
 # CONSTANTS
@@ -14,7 +15,7 @@ json_email_file = 'metadata/emails.json'
 # FUNCTINOS
 # ------------------------
 # ------------------------
-# PASSWORD STUFF
+# VALIDATION STUFF
 # ------------------------
 def hash_password(password):
     salt = bcrypt.gensalt()
@@ -24,22 +25,36 @@ def hash_password(password):
 def verify_password(password, stored_hash):
     return bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
 
+def is_valid_email(email):
+    email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+    return re.match(email_regex, email) is not None
+
+
 # ------------------------
 # ACCOUNT STUFF
 # ------------------------
 def make_account(username, password, email):
-    with open(json_user_file, "r") as file:
-        users = json.load(file)
+    if not is_valid_email(email):
+        return False, "Invalid email format."
 
-    with open(json_email_file, "r") as file:
-        emails = json.load(file)
+    try:
+        # Load existing user data
+        with open(json_user_file, "r") as file:
+            users = json.load(file)
 
+        with open(json_email_file, "r") as file:
+            emails = json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        return False, f"Error loading user data: {str(e)}"
+
+    # Check for duplicate username and email
     if username in users: 
-        return (False, "username in use")
+        return False, "Username already in use."
 
     if email in emails:
-        return (False, "email in use")
+        return False, "Email already in use."
 
+    # Hash password and create the new account
     users[username] = {
         "password": hash_password(password),
         "email": email,
@@ -48,37 +63,74 @@ def make_account(username, password, email):
 
     emails[email] = username
 
-    with open(json_user_file, "w") as file:
-        json.dump(users, file, indent=4)
+    try:
+        # Save the new data back to the files
+        with open(json_user_file, "w") as file:
+            json.dump(users, file, indent=4)
 
-    with open(json_email_file, "w") as file:
-        json.dump(emails, file, indent=4)
+        with open(json_email_file, "w") as file:
+            json.dump(emails, file, indent=4)
+    except (IOError, json.JSONDecodeError) as e:
+        return False, f"Error saving user data: {str(e)}"
 
-    # implement a way for the website to show the errors that occur
+    return True, "Account created successfully."
 
 def check_login(username, password):
-    with open(json_user_file, "r") as file:
-        users = json.load(file)
-    
-    return verify_password(password, users[username]['password'])
+    try:
+        with open(json_user_file, "r") as file:
+            users = json.load(file)
+        
+        # Check if the username exists
+        if username not in users:
+            return False, "Username not found."
+
+        # Verify password
+        if verify_password(password, users[username]['password']):
+            return True, "Login successful."
+        else:
+            return False, "Incorrect password."
+
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        return False, f"Error loading user data: {str(e)}"
+
 
 def turn_admin(username):
-    with open(json_user_file, "r") as file:
-        users = json.load(file)
+    try:
+        with open(json_user_file, "r") as file:
+            users = json.load(file)
 
-    users[username]["admin"] = True
+        if username not in users:
+            return False, "User not found."
 
-    with open(json_user_file, "w") as file:
-        json.dump(users, file, indent=4)
+        users[username]["admin"] = True
+
+        with open(json_user_file, "w") as file:
+            json.dump(users, file, indent=4)
+
+        return True, "User is now an admin."
+
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        return False, f"Error loading user data: {str(e)}"
+
 
 def turn_user(username):
-    with open(json_user_file, "r") as file:
-        users = json.load(file)
+    try:
+        with open(json_user_file, "r") as file:
+            users = json.load(file)
 
-    users[username]["admin"] = False
+        if username not in users:
+            return False, "User not found."
 
-    with open(json_user_file, "w") as file:
-        json.dump(users, file, indent=4)
+        users[username]["admin"] = False
+
+        with open(json_user_file, "w") as file:
+            json.dump(users, file, indent=4)
+
+        return True, "User is no longer an admin."
+
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        return False, f"Error loading user data: {str(e)}"
+
 
 # ------------------------
 # TESTING
