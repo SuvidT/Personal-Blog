@@ -51,10 +51,10 @@ def internal_server_error(e):
 @app.route('/')
 @app.route('/articles/')
 def articles():
-
     articles = get_articles()
 
-    return render_template("articles.html", articles=articles)
+    user = session.get('user')
+    return render_template("articles.html", articles=articles, user=user)
 
 @app.route('/articles/<int:num>')
 def article(num):
@@ -63,18 +63,8 @@ def article(num):
     if article is None:
         abort(404)
 
-    return render_template("article.html", article=article)
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
-
-        if check_login(username, password):
-            return redirect(url_for('/'))
-
-    return render_template("login.html")
+    user = session.get('user')
+    return render_template("article.html", article=article, user=user)
 
 @app.route('/signup')
 def signup():
@@ -84,13 +74,41 @@ def signup():
         password = request.form.get('password')
         confirm = request.form.get('confirm_password')
 
-        return redirect(url_for('login'))
+        if password != confirm:
+            flash("Passwords do not match")
+            return redirect(url_for('signup'))
 
+        success, message = make_account(username, password, email)
+        if success:
+            flash("Account created! Please log in.")
+            return redirect(url_for('login'))
+        else:
+            flash(message)
+            return redirect(url_for('signup'))
 
     return render_template("signup.html")
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        if check_login(username, password):
+            session['user'] = username
+            return redirect(url_for('articles'))
+        
+        flash("Invalid login")
+
+    return render_template("login.html")
+
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    return redirect(url_for('articles'))
 
 # ------------------------
 # RUNNING
 # ------------------------
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
