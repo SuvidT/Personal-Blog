@@ -83,7 +83,7 @@ def signup():
             flash("Account created! Please log in.")
             return redirect(url_for('login'))
         else:
-            flash(message)
+            flash(message, "error")
             return redirect(url_for('signup'))
 
     return render_template("signup.html")
@@ -94,11 +94,13 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
 
-        if check_login(username, password):
+        success, message = check_login(username, password)
+        if success:
             session['user'] = username
             return redirect(url_for('articles'))
-        
-        flash("Invalid login")
+        else:
+            flash(message)
+            return redirect(url_for('login'))
 
     return render_template("login.html")
 

@@ -3,6 +3,7 @@
 # ------------------------
 import json
 import bcrypt
+import re
 
 # ------------------------
 # CONSTANTS
@@ -14,7 +15,7 @@ json_email_file = 'metadata/emails.json'
 # FUNCTINOS
 # ------------------------
 # ------------------------
-# PASSWORD STUFF
+# VALIDATION STUFF
 # ------------------------
 def hash_password(password):
     salt = bcrypt.gensalt()
@@ -24,10 +25,18 @@ def hash_password(password):
 def verify_password(password, stored_hash):
     return bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
 
+def is_valid_email(email):
+    email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+    return re.match(email_regex, email) is not None
+
+
 # ------------------------
 # ACCOUNT STUFF
 # ------------------------
 def make_account(username, password, email):
+    if not is_valid_email(email):
+        return False, "Invalid email format."
+
     try:
         # Load existing user data
         with open(json_user_file, "r") as file:
