@@ -13,6 +13,9 @@ json_email_file = 'metadata/emails.json'
 # ------------------------
 # FUNCTINOS
 # ------------------------
+# ------------------------
+# PASSWORD STUFF
+# ------------------------
 def hash_password(password):
     salt = bcrypt.gensalt()
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
@@ -21,7 +24,10 @@ def hash_password(password):
 def verify_password(password, stored_hash):
     return bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
 
-def make_user(username, password, email):
+# ------------------------
+# ACCOUNT STUFF
+# ------------------------
+def make_account(username, password, email):
     with open(json_user_file, "r") as file:
         users = json.load(file)
 
@@ -48,13 +54,15 @@ def make_user(username, password, email):
     with open(json_email_file, "w") as file:
         json.dump(emails, file, indent=4)
 
+    # implement a way for the website to show the errors that occur
+
 def check_login(username, password):
     with open(json_user_file, "r") as file:
         users = json.load(file)
     
     return verify_password(password, users[username]['password'])
 
-def make_admin(username):
+def turn_admin(username):
     with open(json_user_file, "r") as file:
         users = json.load(file)
 
@@ -63,7 +71,7 @@ def make_admin(username):
     with open(json_user_file, "w") as file:
         json.dump(users, file, indent=4)
 
-def make_user(username):
+def turn_user(username):
     with open(json_user_file, "r") as file:
         users = json.load(file)
 
